@@ -25,10 +25,5 @@ namespace BusinessObject.Models
                 builder.UseSqlServer(config.GetConnectionString("EBookStoreDB"));
             }
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<BookAuthor>().HasKey(table => new { table.AuthorId, table.BookId });
-        }
     }
 }

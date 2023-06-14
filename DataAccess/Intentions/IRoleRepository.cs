@@ -1,16 +1,17 @@
 ﻿using BusinessObject.Models;
+using Microsoft.AspNetCore.OData.Deltas;
 
 namespace DataAccess.Intentions
 {
     public interface IRoleRepository
     {
-        public Task<List<Role>> GetRoles();
+        public IQueryable<Role> GetRoles();
 
-        public Task<Role?> GetRoleById(int id);
+        public IQueryable<Role> GetRoleById(int id);
 
         public Task<Role> Create(Role role);
 
-        public Task<int> Update(Role entity);
+        public Task<Role?> Update(int key, Delta<Role> role);
 
         public Task<int> Delete(int id);
     }

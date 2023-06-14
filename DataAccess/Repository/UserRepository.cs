@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Models;
 using DataAccess.Intentions;
+using Microsoft.AspNetCore.OData.Deltas;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
@@ -17,36 +18,44 @@ namespace DataAccess.Repository
                 .Include(user => user.Role).FirstOrDefaultAsync();
         }
 
-        public async Task<User?> GetUserById(int id)
+        public IQueryable<User> GetUsers()
         {
-            return await _dbContext.Users.AsNoTracking()
+            return _dbContext.Users.AsNoTracking();
+        }
+
+        public IQueryable<User> GetUserById(int id)
+        {
+            return _dbContext.Users.AsNoTracking()
                 .Where(user => user.Id == id)
-                .Include(user => user.Role).FirstOrDefaultAsync();
+                .Include(user => user.Role);
         }
 
         public async Task<User> Create(User entity)
         {
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
-            return await _dbContext.Users.AsNoTracking()
-                .Where(user => user.Id == entity.Id)
-                .Include(user => user.Role).FirstAsync();
+            _dbContext.Entry(entity).State = EntityState.Detached;
+            return entity;
         }
 
-        public async Task<int> Update(User entity)
+        public async Task<User?> Update(int key, Delta<User> user)
         {
-            return await _dbContext.Users.Where(user => user.Id == user.Id)
-                 .ExecuteUpdateAsync(users => users
-                 .SetProperty(user => user.Source, user => entity.Source)
-                 .SetProperty(user => user.FirstName, user => entity.FirstName)
-                 .SetProperty(user => user.MiddleName, user => entity.MiddleName)
-                 .SetProperty(user => user.LastName, user => entity.LastName));
+            var entity = await _dbContext.Users.FindAsync(key);
+            if (entity == null) return null;
+
+            user.Patch(entity);
+            await _dbContext.SaveChangesAsync();
+            _dbContext.Entry(entity).State = EntityState.Detached;
+            return entity;
         }
 
         public async Task<int> Delete(int id)
         {
-            return await _dbContext.Users.Where(user => user.Id == id)
-                 .ExecuteDeleteAsync();
+            var product = await _dbContext.Users.FindAsync(id);
+            if (product == null) return 0;
+
+            _dbContext.Users.Remove(product);
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Models;
+using Microsoft.AspNetCore.OData.Deltas;
 
 namespace DataAccess.Intentions
 {
@@ -6,11 +7,13 @@ namespace DataAccess.Intentions
     {
         public Task<User?> Login(string email, string password);
 
-        public Task<User?> GetUserById(int id);
+        public IQueryable<User> GetUsers();
 
-        public Task<User> Create(User user);
+        public IQueryable<User> GetUserById(int id);
 
-        public Task<int> Update(User entity);
+        public Task<User> Create(User entity);
+
+        public Task<User?> Update(int key, Delta<User> user);
 
         public Task<int> Delete(int id);
     }

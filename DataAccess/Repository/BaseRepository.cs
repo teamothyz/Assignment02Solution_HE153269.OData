@@ -10,5 +10,13 @@ namespace DataAccess.Repository
         {
             _dbContext = context;
         }
+
+        public async Task<T?> Update<T>(T entity)
+        {
+            if (entity == null) return default;
+            _dbContext.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
+        }
     }
 }
