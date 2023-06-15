@@ -1,6 +1,7 @@
 ﻿using BusinessObject.Models;
 using DataAccess.Intentions;
 using eBookStoreAPI.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Deltas;
 using Microsoft.AspNetCore.OData.Query;
@@ -20,24 +21,28 @@ namespace eBookStoreAPI.Controllers
 
         [HttpGet]
         [EnableQuery]
+        [Authorize]
         public IQueryable<Role> Get()
         {
             return _roleRepository.GetRoles();
         }
 
         [EnableQuery]
+        [Authorize]
         public SingleResult<Role> Get(int key)
         {
             IQueryable<Role> result = _roleRepository.GetRoleById(key);
             return SingleResult.Create(result);
         }
 
-        public async Task<IActionResult> Post(Role role)
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Post([FromBody] Role role)
         {
             role = await _roleRepository.Create(role);
             return Created(role);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Patch(int key, Delta<Role> role)
         {
             var entity = await _roleRepository.Update(key, role);
@@ -45,6 +50,7 @@ namespace eBookStoreAPI.Controllers
             return Updated(entity);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int key)
         {
             var count = await _roleRepository.Delete(key);

@@ -27,7 +27,8 @@ namespace DataAccess.Repository
         {
             return _dbContext.Users.AsNoTracking()
                 .Where(user => user.Id == id)
-                .Include(user => user.Role);
+                .Include(user => user.Role)
+                .Include(user => user.Publisher);
         }
 
         public async Task<User> Create(User entity)

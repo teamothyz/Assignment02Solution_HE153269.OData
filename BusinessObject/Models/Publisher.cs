@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BusinessObject.Models
 {
@@ -22,8 +23,10 @@ namespace BusinessObject.Models
         [Column("country")]
         public string Country { get; set; } = null!;
 
+        [JsonIgnore]
         public ICollection<Book> Books { get; set; } = null!;
 
+        [JsonIgnore]
         public ICollection<User> Users { get; set; } = null!;
     }
 }

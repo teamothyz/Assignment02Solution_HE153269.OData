@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Results;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.AspNetCore.OData.Deltas;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eBookStoreAPI.Controllers
 {
@@ -19,12 +20,14 @@ namespace eBookStoreAPI.Controllers
 
         [HttpGet]
         [EnableQuery]
+        [Authorize]
         public IQueryable<BookAuthor> Get()
         {
             return _bookAuthorRepository.GetBookAuthors();
         }
 
         [EnableQuery]
+        [Authorize]
         public SingleResult<BookAuthor> Get(int key)
         {
             IQueryable<BookAuthor> result = _bookAuthorRepository.GetBookAuthorById(key);
@@ -32,13 +35,15 @@ namespace eBookStoreAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(BookAuthor bookAuthor)
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Post([FromBody] BookAuthor bookAuthor)
         {
             bookAuthor = await _bookAuthorRepository.Create(bookAuthor);
             return Created(bookAuthor);
         }
 
         [HttpPatch]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Patch(int key, Delta<BookAuthor> bookAuthor)
         {
             var entity = await _bookAuthorRepository.Update(key, bookAuthor);
@@ -47,6 +52,7 @@ namespace eBookStoreAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int key)
         {
             var count = await _bookAuthorRepository.Delete(key);

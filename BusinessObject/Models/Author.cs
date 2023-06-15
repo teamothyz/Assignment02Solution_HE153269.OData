@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObject.Models
@@ -34,6 +35,7 @@ namespace BusinessObject.Models
         [Column("email_address")]
         public string Email { get; set; } = null!;
 
+        [JsonIgnore]
         public ICollection<BookAuthor> BookAuthors { get; set; } = null!;
     }
 }

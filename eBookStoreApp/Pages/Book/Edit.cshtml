@@ -1,0 +1,58 @@
+﻿@page "/book/{id:int}/edit"
+@model eBookStoreApp.Pages.Book.EditModel
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h1>Edit Book</h1>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" class="form-control" id="id" asp-for="UpdateBook.Id" value="@Model.Book.Id" required>
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" asp-for="UpdateBook.Title" value="@Model.Book.Title" required>
+    </div>
+
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <input type="text" class="form-control" id="type" asp-for="UpdateBook.Type" value="@Model.Book.Type" required>
+    </div>
+
+    <div class="form-group">
+        <label for="publisherId">Publisher Id:</label>
+        <input type="number" class="form-control" id="publisherId" asp-for="UpdateBook.PublisherId" value="@Model.Book.PublisherId" required>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" class="form-control" id="price" asp-for="UpdateBook.Price" value="@Model.Book.Price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="advance">Advance:</label>
+        <input type="number" step="0.01" class="form-control" id="advance" asp-for="UpdateBook.Advance" value="@Model.Book.Advance" required>
+    </div>
+
+    <div class="form-group">
+        <label for="royality">Royality:</label>
+        <input type="number" step="0.01" class="form-control" id="royality" asp-for="UpdateBook.Royality" value="@Model.Book.Royality" required>
+    </div>
+
+    <div class="form-group">
+        <label for="ytdSales">YTD Sales:</label>
+        <input type="number" class="form-control" id="ytdSales" asp-for="UpdateBook.YtdSales" value="@Model.Book.YtdSales" required>
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Notes:</label>
+        <textarea class="form-control" id="notes" name="@Html.NameFor(m => m.UpdateBook.Notes)">@Model.Book.Notes</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="publishedDate">Published Date:</label>
+        <input type="date" class="form-control" id="publishedDate" asp-for="UpdateBook.PulishedDate" value="@Model.Book.PulishedDate.ToString("yyyy-MM-dd")" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

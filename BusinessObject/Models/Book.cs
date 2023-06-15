@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObject.Models
@@ -33,13 +34,14 @@ namespace BusinessObject.Models
         public int YtdSales { get; set; }
 
         [Column("notes")]
-        public string Notes { get; set; } = null!;
+        public string? Notes { get; set; }
 
         [Column("published_date")]
         public DateTime PulishedDate { get; set; }
 
         public Publisher Publisher { get; set; } = null!;
 
+        [JsonIgnore]
         public ICollection<BookAuthor> BookAuthors { get; set; } = null!;
     }
 }

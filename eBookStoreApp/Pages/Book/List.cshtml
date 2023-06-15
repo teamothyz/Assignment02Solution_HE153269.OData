@@ -1,0 +1,55 @@
+﻿@page "/book"
+@model eBookStoreApp.Pages.Book.ListModel
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<h1>Book List</h1>
+@if (User.IsInRole("admin"))
+{
+    <a href="@Url.Page("/Book/Add")" class="btn btn-primary">Add</a>
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Advance</th>
+            <th>Royality</th>
+            <th>YTD Sales</th>
+            <th>Notes</th>
+            <th>Published Date</th>
+            <th>Publisher</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Type</td>
+                <td>@book.Price.ToString("C")</td>
+                <td>@book.Advance</td>
+                <td>@book.Royality</td>
+                <td>@book.YtdSales</td>
+                <td>@book.Notes</td>
+                <td>@book.PulishedDate.ToString("yyyy-MM-dd")</td>
+                <td>@book.Publisher.Name</td>
+                <td>
+                    <a href="@Url.Page("/Book/View", new { book.Id })" class="btn btn-primary">View</a>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <a href="@Url.Page("/Book/Edit", new { book.Id })" class="btn btn-warning">Update</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@book.Id" onsubmit="return confirm('Are you sure you want to delete this book?')">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

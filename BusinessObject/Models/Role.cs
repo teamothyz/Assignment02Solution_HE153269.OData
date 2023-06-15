@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +14,7 @@ namespace BusinessObject.Models
         [Column("role_desc")]
         public string Description { get; set; } = null!;
 
+        [JsonIgnore]
         public ICollection<User> Users { get; set; } = null!;
     }
 }

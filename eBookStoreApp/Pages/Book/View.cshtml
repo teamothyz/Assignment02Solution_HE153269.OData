@@ -1,0 +1,77 @@
+﻿@page "/book/{id:int}"
+@model eBookStoreApp.Pages.Book.ViewModel
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h1>Book Details</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>@Model.Book.Id</dd>
+
+                <dt>Type</dt>
+                <dd>@Model.Book.Type</dd>
+
+                <dt>Publisher</dt>
+                <dd>@Model.Book.Publisher.Name</dd>
+
+                <dt>Published Date</dt>
+                <dd>@Model.Book.PulishedDate.ToString("yyyy-MM-dd")</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>Price</dt>
+                <dd>@Model.Book.Price.ToString("C")</dd>
+
+                <dt>Advance</dt>
+                <dd>@Model.Book.Advance.ToString("F2")</dd>
+
+                <dt>Royalty</dt>
+                <dd>@Model.Book.Royality.ToString("F2")</dd>
+
+                <dt>YTD Sales</dt>
+                <dd>@Model.Book.YtdSales</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<p>Notes: @Model.Book.Notes</p>
+@if (User.IsInRole("admin"))
+{
+    <a href="@Url.Page("/Book/Edit", new { Model.Book.Id })" class="btn btn-primary">Edit</a>
+}
+<hr />
+
+<h2>Publisher Information</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>@Model.Book.PublisherId</dd>
+
+                <dt>Name</dt>
+                <dd>@Model.Book.Publisher.Name</dd>
+
+                <dt>City</dt>
+                <dd>@Model.Book.Publisher.City</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>State</dt>
+                <dd>@Model.Book.Publisher.State</dd>
+
+                <dt>Country</dt>
+                <dd>@Model.Book.Publisher.Country</dd>
+            </dl>
+        </div>
+    </div>
+</div>

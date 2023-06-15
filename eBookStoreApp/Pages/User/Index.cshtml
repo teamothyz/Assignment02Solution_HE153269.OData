@@ -1,0 +1,62 @@
+﻿@page "/user"
+@model eBookStoreApp.Pages.User.IndexModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container">
+    <h2>User Profile</h2>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.Email</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Source:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.Source</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">First Name:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.FirstName</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Middle Name:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.MiddleName</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Last Name:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.LastName</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Hired Date:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.HireDate.ToString("dd-MM-yyyy")</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Publisher Name:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.Publisher.Name</span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Role Description:</label>
+        <div class="col-sm-10">
+            <span class="form-control-plaintext">@Model.UserInfo.Role.Description</span>
+        </div>
+    </div>
+
+    <a href="@Url.Page("/User/Edit") class="btn btn-primary mt-3">Edit</a>
+</div>
