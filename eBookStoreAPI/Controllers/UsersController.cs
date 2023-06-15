@@ -46,7 +46,17 @@ namespace eBookStoreAPI.Controllers
         public async Task<IActionResult> Patch(Delta<User> user)
         {
             var key = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var entity = await _userRepository.Update(key, user);
+            var newDelta = new Delta<User>();
+            foreach (var fieldName in user.GetChangedPropertyNames())
+            {
+                if (fieldName == nameof(BusinessObject.Models.User.RoleId)) continue;
+                if (user.TryGetPropertyValue(fieldName, out object fieldValue))
+                {
+                    newDelta.TrySetPropertyValue(fieldName, fieldValue);
+                }
+            }
+
+            var entity = await _userRepository.Update(key, newDelta);
             if (entity == null) return NotFound();
             return Updated(entity);
         }

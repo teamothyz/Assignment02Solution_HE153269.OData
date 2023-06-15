@@ -1,0 +1,55 @@
+﻿@page "/author/{id:int}/edit"
+@model eBookStoreApp.Pages.Author.EditModel
+@{
+    ViewData["Title"] = "Update Author";
+}
+
+<div class="container">
+    <h1>Update Author</h1>
+
+    <form method="post">
+        <input class="form-control" type="hidden" id="id" asp-for="AuthorUpdate.Id" value="@Model.Author.Id">
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input class="form-control" type="text" id="firstName" asp-for="AuthorUpdate.FirstName" value="@Model.Author.FirstName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input class="form-control" type="text" id="lastName" asp-for="AuthorUpdate.LastName" value="@Model.Author.LastName">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input class="form-control" type="text" id="phone" asp-for="AuthorUpdate.Phone" value="@Model.Author.Phone">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input class="form-control" type="text" id="address" asp-for="AuthorUpdate.Address" value="@Model.Author.Address">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input class="form-control" type="text" id="city" asp-for="AuthorUpdate.City" value="@Model.Author.City">
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input class="form-control" type="text" id="state" asp-for="AuthorUpdate.State" value="@Model.Author.State">
+        </div>
+
+        <div class="form-group">
+            <label for="zip">Zip:</label>
+            <input class="form-control" type="text" id="zip" asp-for="AuthorUpdate.Zip" value="@Model.Author.Zip">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" type="text" id="email" asp-for="AuthorUpdate.Email" value="@Model.Author.Email">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Update</button>
+    </form>
+</div>

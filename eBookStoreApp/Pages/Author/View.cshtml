@@ -1,0 +1,24 @@
+﻿@page "/author/{id:int}"
+@model eBookStoreApp.Pages.Author.ViewModel
+@{
+    ViewData["Title"] = "Author Details";
+}
+<div class="container">
+    <h1>Author Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Author.FirstName @Model.Author.LastName</h5>
+            <p class="card-text"><strong>Phone:</strong> @Model.Author.Phone</p>
+            <p class="card-text"><strong>Address:</strong> @Model.Author.Address</p>
+            <p class="card-text"><strong>City:</strong> @Model.Author.City</p>
+            <p class="card-text"><strong>State:</strong> @Model.Author.State</p>
+            <p class="card-text"><strong>Zip:</strong> @Model.Author.Zip</p>
+            <p class="card-text"><strong>Email:</strong> @Model.Author.Email</p>
+        </div>
+    </div>
+    @if (User.IsInRole("admin"))
+    {
+        <a href="@Url.Page("/Author/Edit", new { Model.Author.Id })" class="btn btn-warning mt-3">Update</a>
+    }
+</div>

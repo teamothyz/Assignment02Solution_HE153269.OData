@@ -1,0 +1,36 @@
+﻿@page "/publisher/{id:int}"
+@model eBookStoreApp.Pages.Publisher.ViewModel
+@{
+    ViewData["Title"] = "Publisher Details";
+}
+<div class="container">
+    <h1>Publisher Details</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Id:</dt>
+                <dd class="col-sm-8">@Model.Publisher.Id</dd>
+
+                <dt class="col-sm-4">Name:</dt>
+                <dd class="col-sm-8">@Model.Publisher.Name</dd>
+
+                <dt class="col-sm-4">City:</dt>
+                <dd class="col-sm-8">@Model.Publisher.City</dd>
+
+                <dt class="col-sm-4">State:</dt>
+                <dd class="col-sm-8">@Model.Publisher.State</dd>
+
+                <dt class="col-sm-4">Country:</dt>
+                <dd class="col-sm-8">@Model.Publisher.Country</dd>
+            </dl>
+        </div>
+    </div>
+
+    @if (User.IsInRole("admin"))
+    {
+        <div class="mt-4">
+            <a href="@Url.Page("/Publisher/Edit", new {Model.Publisher.Id})" class="btn btn-secondary mt-3">Edit</a>
+        </div>
+    }
+</div>

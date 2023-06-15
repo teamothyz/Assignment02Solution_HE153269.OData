@@ -1,0 +1,50 @@
+﻿@page "/publisher"
+@model eBookStoreApp.Pages.Publisher.ListModel
+@{
+    ViewData["Title"] = "List Publishers";
+}
+
+<div class="container">
+    <h1>Publishers</h1>
+
+    @if (User.IsInRole("admin"))
+    {
+        <a href="@Url.Page("/Publisher/Add")" class="btn btn-primary mt-3">Add</a>
+    }
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var publisher in Model.Publishers)
+            {
+                <tr>
+                    <td>@publisher.Id</td>
+                    <td>@publisher.Name</td>
+                    <td>@publisher.City</td>
+                    <td>@publisher.State</td>
+                    <td>@publisher.Country</td>
+                    <td>
+                        <a href="@Url.Page("/Publisher/View", new { publisher.Id })" class="btn btn-primary">View</a>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a href="@Url.Page("/Publisher/Edit", new { publisher.Id })" class="btn btn-warning">Update</a>
+                            <form action="@Url.Page("/Publisher/Delete", new {publisher.Id})" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

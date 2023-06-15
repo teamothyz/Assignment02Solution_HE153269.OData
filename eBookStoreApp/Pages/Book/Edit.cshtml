@@ -20,8 +20,20 @@
     </div>
 
     <div class="form-group">
-        <label for="publisherId">Publisher Id:</label>
-        <input type="number" class="form-control" id="publisherId" asp-for="UpdateBook.PublisherId" value="@Model.Book.PublisherId" required>
+        <label for="publisherId">Publisher:</label>
+        <select id="publisherId" name="UpdateBook.PublisherId" class="form-control">
+            @foreach (var publisher in Model.Publishers)
+            {
+                @if (Model.Book.PublisherId == publisher.Id)
+                {
+                    <option selected value="@publisher.Id">@publisher.Name</option>
+                }
+                else
+                {
+                    <option value="@publisher.Id">@publisher.Name</option>
+                }
+            }
+        </select>
     </div>
 
     <div class="form-group">
@@ -54,5 +66,5 @@
         <input type="date" class="form-control" id="publishedDate" asp-for="UpdateBook.PulishedDate" value="@Model.Book.PulishedDate.ToString("yyyy-MM-dd")" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary mt-3">Update</button>
 </form>

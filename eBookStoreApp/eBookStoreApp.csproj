@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Author\" />
     <Folder Include="Pages\BookAuthor\" />
-    <Folder Include="Pages\Publisher\" />
   </ItemGroup>
 
   <ItemGroup>

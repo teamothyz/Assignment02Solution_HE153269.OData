@@ -16,11 +16,17 @@ namespace eBookStoreApp.Pages.Book
         [BindProperty]
         public BusinessObject.Models.Book UpdateBook { get; set; } = null!;
 
+        public List<BusinessObject.Models.Publisher> Publishers { get; set; } = new();
+
         public async Task<IActionResult> OnGet()
         {
             var client = new ClientService(HttpContext);
             var book = await client.Get<BusinessObject.Models.Book>($"/odata/books/{Id}?$expand=publisher");
             if (book == null) return NotFound();
+
+            var publishers = await client.Get<OdataList<BusinessObject.Models.Publisher>>("/odata/publishers");
+            if (publishers == null) return NotFound();
+            Publishers = publishers.Value;
 
             Book = book;
             return Page();

@@ -1,0 +1,53 @@
+﻿@page "/author/add"
+@model eBookStoreApp.Pages.Author.AddModel
+@{
+    ViewData["Title"] = "Add Author";
+}
+
+<div class="container">
+    <h1>Add Author</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input class="form-control" type="text" id="firstName" name="FirstName" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input class="form-control" type="text" id="lastName" name="LastName" />
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input class="form-control" type="text" id="phone" name="Phone" />
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input class="form-control" type="text" id="address" name="Address" />
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input class="form-control" type="text" id="city" name="City" />
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input class="form-control" type="text" id="state" name="State" />
+        </div>
+
+        <div class="form-group">
+            <label for="zip">Zip:</label>
+            <input class="form-control" type="text" id="zip" name="Zip" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" type="text" id="email" name="Email" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Add</button>
+    </form>
+</div>

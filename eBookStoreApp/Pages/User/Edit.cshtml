@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "user/edit"
 @model eBookStoreApp.Pages.User.EditModel
 @{
     ViewData["Title"] = "Edit Profile";
@@ -12,7 +12,7 @@
         <input type="hidden" class="form-control" asp-for="UserUpdate.Id" value="@Model.UserInfo.Id" />
         <div class="form-group">
             <label>Email:</label>
-            <input class="form-control" asp-for="UserUpdate.Email" value="@Model.UserInfo.Email"/>
+            <input class="form-control" asp-for="UserUpdate.Email" value="@Model.UserInfo.Email" />
         </div>
         <div class="form-group">
             <label>First Name:</label>
@@ -30,14 +30,25 @@
             <label>Source:</label>
             <input class="form-control" asp-for="UserUpdate.Source" value="@Model.UserInfo.Source" />
         </div>
+
         <div class="form-group">
-            <label>Publisher ID:</label>
-            <input class="form-control" asp-for="UserUpdate.PublisherId" value="@Model.UserInfo.PublisherId" />
+            <label for="publisherId">Publisher:</label>
+            <select id="publisherId" name="UserUpdate.PublisherId" class="form-control">
+                @foreach (var publisher in Model.Publishers)
+                {
+                    @if (Model.UserInfo.PublisherId == publisher.Id)
+                    {
+                        <option selected value="@publisher.Id">@publisher.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@publisher.Id">@publisher.Name</option>
+                    }
+                }
+            </select>
         </div>
-        <div class="form-group">
-            <label>Role ID:</label>
-            <input class="form-control" asp-for="UserUpdate.RoleId" value="@Model.UserInfo.RoleId" />
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+
+        <input type="hidden" class="form-control" asp-for="UserUpdate.RoleId" value="@Model.UserInfo.RoleId" />
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
     </form>
 </div>
