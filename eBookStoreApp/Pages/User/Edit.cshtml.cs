@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace eBookStoreApp.Pages.User
 {
-    [Authorize]
+    [Authorize(Roles = "member")]
     public class EditModel : PageModel
     {
         [BindProperty]

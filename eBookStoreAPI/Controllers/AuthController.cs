@@ -31,8 +31,20 @@ namespace eBookStoreAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
-            var user = await _userRepository.Login(model.Email, model.Password);
+            var user = new BusinessObject.Models.User();
+            if (model.Email == _configuration["Admin"] && model.Password == _configuration["Password"])
+            {
+                user = new BusinessObject.Models.User
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                    RoleId = 1,
+                    FirstName = "Admin Ebook Store"
+                };
+            }
+            else user = await _userRepository.Login(model.Email, model.Password);
             if (user == null) return NotFound();
+
             var role = user.RoleId == 1 ? "admin" : "member";
 
             var tokenHandler = new JwtSecurityTokenHandler();

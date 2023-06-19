@@ -29,7 +29,7 @@ namespace eBookStoreApp.Pages.User
 
         public async Task<IActionResult> OnPost()
         {
-            if (User.Identity?.IsAuthenticated == true) return RedirectToPage("/User/Index");
+            if (User.Identity?.IsAuthenticated == true) return RedirectToPage("/Index");
 
             var client = new ClientService(HttpContext);
             var requestModel = new LoginRequestModel { Email = Email, Password = Password };
@@ -52,7 +52,7 @@ namespace eBookStoreApp.Pages.User
             {
                 IsPersistent = false
             });
-            return RedirectToPage("/User/Index");
+            return RedirectToPage("/Index");
         }
     }
 }
