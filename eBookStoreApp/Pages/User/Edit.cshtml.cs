@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace eBookStoreApp.Pages.User
 {
     [Authorize(Roles = "member")]
+    [IgnoreAntiforgeryToken(Order = 2000)]
     public class EditModel : PageModel
     {
         [BindProperty]

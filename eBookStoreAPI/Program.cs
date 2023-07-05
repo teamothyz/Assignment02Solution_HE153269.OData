@@ -88,6 +88,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAll");
 app.UseODataBatching();
 app.UseRouting();
 app.UseAuthentication();
