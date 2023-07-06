@@ -7,6 +7,67 @@
 <div class="container">
     <h1>Add Author</h1>
 
+    <form id="my-form" method="post">
+
+        <div id="error" class="d-none alert alert-danger mt-3" role="alert">Add Failed</div>
+        <div id="success" class="d-none alert alert-success mt-3" role="alert">Add Successfully</div>
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input class="form-control" type="text" id="firstName" name="FirstName" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input class="form-control" type="text" id="lastName" name="LastName" />
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input class="form-control" type="text" id="phone" name="Phone" />
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input class="form-control" type="text" id="address" name="Address" />
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input class="form-control" type="text" id="city" name="City" />
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input class="form-control" type="text" id="state" name="State" />
+        </div>
+
+        <div class="form-group">
+            <label for="zip">Zip:</label>
+            <input class="form-control" type="text" id="zip" name="Zip" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" type="text" id="email" name="Email" />
+        </div>
+
+        <div class="form-group d-flex">
+            <button id="submit-btn" type="button" onclick="submitForm('odata/authors', 'POST')" class="btn btn-primary mt-3">Create</button>
+            <button type="reset" class="btn btn-warning mt-3">Clear</button>
+        </div>
+    </form>
+</div>
+
+@*@page "/author/add"
+@model eBookStoreApp.Pages.Author.AddModel
+@{
+    ViewData["Title"] = "Add Author";
+}
+
+<div class="container">
+    <h1>Add Author</h1>
+
     <form method="post">
         <div class="form-group">
             <label for="firstName">First Name:</label>
@@ -50,4 +111,4 @@
 
         <button type="submit" class="btn btn-primary mt-3">Add</button>
     </form>
-</div>
+</div>*@

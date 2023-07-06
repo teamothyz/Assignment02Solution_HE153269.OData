@@ -64,8 +64,8 @@
 
     <form id="my-form" method="post">
 
-        <div id="error" class="d-none text-danger mt-3" role="alert">Update Failed</div>
-        <div id="success" class="d-none text-success mt-3" role="alert">Update Successfully</div>
+        <div id="error" class="d-none alert alert-danger mt-3" role="alert">Update Failed</div>
+        <div id="success" class="d-none alert alert-success mt-3" role="alert">Update Successfully</div>
 
         @*<input type="hidden" class="form-control" name="HireDate" value="@Model.UserInfo.HireDate" />*@
         <input type="hidden" class="form-control" name="Id" value="@Model.UserInfo.Id" />
@@ -108,6 +108,6 @@
         </div>
 
         <input type="hidden" class="form-control" name="RoleId" value="@Model.UserInfo.RoleId" />
-        <button type="button" onclick="submitForm('odata/users', 'PATCH')" class="btn btn-primary mt-3">Save</button>
+        <button id="submit-btn" type="button" onclick="submitForm('odata/users', 'PATCH')" class="btn btn-primary mt-3">Save</button>
     </form>
 </div>

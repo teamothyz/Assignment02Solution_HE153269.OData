@@ -1,4 +1,4 @@
-﻿@page "/book"
+﻿@*@page "/book"
 @model eBookStoreApp.Pages.Book.ListModel
 @{
     ViewData["Title"] = "Book List";
@@ -69,6 +69,88 @@
                         <form action="@Url.Page("/Book/Delete", new {book.Id})" method="post">
                             @Html.AntiForgeryToken()
                             <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+@page "/book"
+@model eBookStoreApp.Pages.Book.ListModel
+@{
+    ViewData["Title"] = "Book List";
+}
+<h1>Book List</h1>
+
+<form class="row mb-3">
+    <div class="col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Title" aria-label="Search by Title" aria-describedby="titleSearchButton" asp-for="@Model.Title" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="Low Price" aria-label="Search by Price" aria-describedby="priceSearchButton" asp-for="@Model.LowPrice" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="High Price" aria-label="Search by Price" aria-describedby="priceSearchButton" asp-for="@Model.HighPrice" />
+        </div>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">Search</button>
+</form>
+
+@if (User.IsInRole("admin"))
+{
+    <a href="@Url.Page("/Book/Add")" class="btn btn-primary mt-3">Add</a>
+}
+
+<div id="error" class="d-none alert alert-danger mt-3" role="alert">Delete Failed</div>
+<div id="success" class="d-none alert alert-success mt-3" role="alert">Delete Successfully</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Advance</th>
+            <th>Royality</th>
+            <th>YTD Sales</th>
+            <th>Notes</th>
+            <th>Published Date</th>
+            <th>Publisher</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr id="b-@book.Id">
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Type</td>
+                <td>@book.Price.ToString("C")</td>
+                <td>@book.Advance</td>
+                <td>@book.Royality</td>
+                <td>@book.YtdSales</td>
+                <td>@book.Notes</td>
+                <td>@book.PulishedDate.ToString("yyyy-MM-dd")</td>
+                <td>@book.Publisher.Name</td>
+                <td>
+                    <a href="@Url.Page("/Book/View", new { book.Id })" class="btn btn-primary">View</a>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <a href="@Url.Page("/Book/Edit", new { book.Id })" class="btn btn-warning">Update</a>
+                        <form method="DELETE">
+                            <button id="btn-@book.Id" onclick="sendDelete('odata/books/@book.Id', '#btn-@book.Id', '#b-@book.Id')" type="button" class="btn btn-danger">Delete</button>
                         </form>
                     }
                 </td>

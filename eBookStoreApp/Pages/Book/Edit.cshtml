@@ -5,6 +5,78 @@
 }
 
 <h1>Edit Book</h1>
+<form id="my-form" method="post">
+
+    <div id="error" class="d-none alert alert-danger mt-3" role="alert">Update Failed</div>
+    <div id="success" class="d-none alert alert-success mt-3" role="alert">Update Successfully</div>
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" name="Title" value="@Model.Book.Title" required>
+    </div>
+
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <input type="text" class="form-control" id="type" name="Type" value="@Model.Book.Type" required>
+    </div>
+
+    <div class="form-group">
+        <label for="publisherId">Publisher:</label>
+        <select id="publisherId" name="PublisherId" class="form-control">
+            @foreach (var publisher in Model.Publishers)
+            {
+                @if (Model.Book.PublisherId == publisher.Id)
+                {
+                    <option selected value="@publisher.Id">@publisher.Name</option>
+                }
+                else
+                {
+                    <option value="@publisher.Id">@publisher.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" class="form-control" id="price" name="Price" value="@Model.Book.Price" required>
+    </div>
+
+    <div class="form-group">
+        <label for="advance">Advance:</label>
+        <input type="number" step="0.01" class="form-control" id="advance" name="Advance" value="@Model.Book.Advance" required>
+    </div>
+
+    <div class="form-group">
+        <label for="royality">Royality:</label>
+        <input type="number" step="0.01" class="form-control" id="royality" name="Royality" value="@Model.Book.Royality" required>
+    </div>
+
+    <div class="form-group">
+        <label for="ytdSales">YTD Sales:</label>
+        <input type="number" class="form-control" id="ytdSales" name="YtdSales" value="@Model.Book.YtdSales" required>
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Notes:</label>
+        <textarea class="form-control" id="notes" name="Notes">@Model.Book.Notes</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="publishedDate">Published Date:</label>
+        <input type="date" class="form-control" id="publishedDate" name="PulishedDate" value="@Model.Book.PulishedDate.ToString("yyyy-MM-dd")" required>
+    </div>
+
+    <button id="submit-btn" type="button" onclick="submitForm('odata/books/@Model.Id', 'PATCH')" class="btn btn-primary mt-3">Update</button>
+</form>
+
+@*@page "/book/{id:int}/edit"
+@model eBookStoreApp.Pages.Book.EditModel
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h1>Edit Book</h1>
 
 <form asp-action="Update" method="post">
     <input type="hidden" class="form-control" id="id" asp-for="UpdateBook.Id" value="@Model.Book.Id" required>
@@ -67,4 +139,4 @@
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Update</button>
-</form>
+</form>*@

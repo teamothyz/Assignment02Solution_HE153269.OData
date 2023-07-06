@@ -1,4 +1,4 @@
-﻿@page "/publisher/{id:int}/edit"
+﻿@*@page "/publisher/{id:int}/edit"
 @model eBookStoreApp.Pages.Publisher.EditModel
 @{
     ViewData["Title"] = "Edit Publisher";
@@ -29,5 +29,43 @@
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Save</button>
+    </form>
+</div>*@
+
+@page "/publisher/{id:int}/edit"
+@model eBookStoreApp.Pages.Publisher.EditModel
+@{
+    ViewData["Title"] = "Edit Publisher";
+}
+<div class="container">
+    <h1>Edit Publisher</h1>
+
+    <form id="my-form" method="post">
+
+        <div id="error" class="d-none alert alert-danger mt-3" role="alert">Update Failed</div>
+        <div id="success" class="d-none alert alert-success mt-3" role="alert">Update Successfully</div>
+
+        <input id="id" class="form-control" type="hidden" name="Id" value="@Model.Publisher.Id" />
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input id="inputName" class="form-control" type="text" name="Name" value="@Model.Publisher.Name" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCity">City</label>
+            <input id="inputCity" class="form-control" type="text" name="City" value="@Model.Publisher.City" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputState">State</label>
+            <input id="inputState" class="form-control" type="text" name="State" value="@Model.Publisher.State" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputCountry">Country</label>
+            <input id="inputCountry" class="form-control" type="text" name="Country" value="@Model.Publisher.Country" />
+        </div>
+
+        <button type="button" onclick="submitForm('odata/publishers/@Model.Id', 'PATCH')" class="btn btn-primary mt-3">Save</button>
     </form>
 </div>

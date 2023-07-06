@@ -1,4 +1,4 @@
-﻿@page "/publisher"
+﻿@*@page "/publisher"
 @model eBookStoreApp.Pages.Publisher.ListModel
 @{
     ViewData["Title"] = "List Publishers";
@@ -40,6 +40,59 @@
                             <form action="@Url.Page("/Publisher/Delete", new {publisher.Id})" method="post">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>*@
+
+@page "/publisher"
+@model eBookStoreApp.Pages.Publisher.ListModel
+@{
+    ViewData["Title"] = "List Publishers";
+}
+
+<div class="container">
+    <h1>Publishers</h1>
+
+    @if (User.IsInRole("admin"))
+    {
+        <a href="@Url.Page("/Publisher/Add")" class="btn btn-primary mt-3">Add</a>
+    }
+
+    <div id="error" class="d-none alert alert-danger mt-3" role="alert">Delete Failed</div>
+    <div id="success" class="d-none alert alert-success mt-3" role="alert">Delete Successfully</div>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var publisher in Model.Publishers)
+            {
+                <tr id="pub-@publisher.Id">
+                    <td>@publisher.Id</td>
+                    <td>@publisher.Name</td>
+                    <td>@publisher.City</td>
+                    <td>@publisher.State</td>
+                    <td>@publisher.Country</td>
+                    <td>
+                        <a href="@Url.Page("/Publisher/View", new { publisher.Id })" class="btn btn-primary">View</a>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a href="@Url.Page("/Publisher/Edit", new { publisher.Id })" class="btn btn-warning">Update</a>
+                            <form action="#" method="DELETE">
+                                <button id="pub-@publisher.Id-delete" onclick="sendDelete('odata/publishers/@publisher.Id', '#pub-@publisher.Id-delete', '#pub-@publisher.Id')" type="button" class="btn btn-danger">Delete</button>
                             </form>
                         }
                     </td>
